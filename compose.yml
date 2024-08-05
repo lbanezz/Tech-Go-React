@@ -3,15 +3,29 @@ services:
     image: postgres:latest
     restart: unless-stopped
     ports:
-    # configuração da portas
-       - ${WSRD_DATABASE_PORT:-5432}:5432 
+      - ${WSGB_DATABASE_PORT:-5432}:5432
     environment:
-        POSTGRES_USER: ${WSRD_DATABASE_PORT}
-        POSTGRES_PASSWORD: ${WSRD_DATABASE_PORT}
-        POSTGRES_DB: ${WSRD_DATABASE_PORT}
+      POSTGRES_USER: ${WSGB_DATABASE_USER}
+      POSTGRES_PASSWORD: ${WSGB_DATABASE_PASSWORD}
+      POSTGRES_DB: ${WSGB_DATABASE_NAME}
     volumes:
-      - db:/var/lib/postresql/data
+      - db:/var/lib/postgresql/data
 
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    restart: unless-stopped
+    depends_on:
+      - db
+    ports: 
+      - 8081:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: password
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+  
 volumes:
   db:
+    driver: local
+  pgadmin:
     driver: local
