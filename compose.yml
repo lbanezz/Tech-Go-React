@@ -10,7 +10,7 @@ services:
         POSTGRES_PASSWORD: ${WSRD_DATABASE_PORT}
         POSTGRES_DB: ${WSRD_DATABASE_PORT}
     volumes:
-      -db:/var/lib/postresql/data
+      - db:/var/lib/postresql/data
 
 volumes:
   db:
