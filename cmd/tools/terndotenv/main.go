@@ -11,7 +11,8 @@ func main() {
 		panic(err) 
 	}
 
-	cmd := exec.Command("tern", 
+	cmd := exec.Command(
+		"tern", 
 		"migrate", 
 		"--migrations", 
 		"./internal/store/pgstore/migrations", 
