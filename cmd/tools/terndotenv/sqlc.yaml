@@ -1,0 +1,8 @@
+version: "2"
+sql:
+  - engine: "postresql"
+    queries: "./queries"
+    schema: "./migrations"
+    gen: 
+      go:
+        out: "." 
